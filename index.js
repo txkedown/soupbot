@@ -2,8 +2,9 @@ const botconfig = require("./botconfig.json");
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.on('ready', () =>{
-    console.log('This bot is online!');
+client.on('ready', async () =>{
+    console.log('This bot is online!')
+    bot.user.setActivity("v.1.0.0", {type: "STREAMING"});
 })
 
 client.on("message", async message => {
