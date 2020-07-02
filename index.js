@@ -4,7 +4,7 @@ const bot = new Discord.Client();
 
 bot.on('ready', async () =>{
     console.log('This bot is online!')
-    bot.user.setActivity("v.1.0.0", {type: "STREAMING"});
+    bot.user.setActivity("v.1.0.0", {type: "PLAYING"});
 })
 
 bot.on("message", async message => {
@@ -15,7 +15,7 @@ bot.on("message", async message => {
     let cmd = messageArray[0];
     let args = messageArray.slice(1);
 
-    if (cmd === '${prefix}ping'){
+    if (cmd === `${prefix}ping`){
         return message.channel.send("pong")
     }
 })
