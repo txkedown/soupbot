@@ -33,7 +33,6 @@ if (message.content.startsWith(prefix + "userinfo")) {
     let user = message.mentions.users.first() || message.author;
 
     let userinfo = {};
-    userinfo.avatar. = user.display.AvatarURL()
     userinfo.name = user.username
     userinfo.discrim - `#${user.discriminator}`;
     userinfo.id = user.id;
