@@ -1,13 +1,13 @@
 const botconfig = require("./botconfig.json");
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const bot = new Discord.Client();
 
-client.on('ready', async () =>{
+bot.on('ready', async () =>{
     console.log('This bot is online!')
     bot.user.setActivity("v.1.0.0", {type: "STREAMING"});
 })
 
-client.on("message", async message => {
+bot.on("message", async message => {
     if(message.author.bot || message.channel.type === "dm") return;
 
     let prefix = botconfig.prefix;
@@ -20,4 +20,4 @@ client.on("message", async message => {
     }
 })
 
-client.login(process.env.token);
+bot.login(process.env.token);
