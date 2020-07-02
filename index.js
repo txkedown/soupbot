@@ -3,7 +3,6 @@ const colours = require("./colours.json");
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const prefix = '=';
-console.log("\nPREFIX:\n" + settings.prefix);
 const moment = require("moment");
 require("moment-duration-format");
 
