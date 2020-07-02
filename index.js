@@ -2,8 +2,12 @@ const botconfig = require("./botconfig.json");
 const colours = require("./colours.json");
 const Discord = require('discord.js');
 const bot = new Discord.Client();
+const prefix = '=';
+console.log("\nPREFIX:\n" + settings.prefix);
 const moment = require("moment");
 require("moment-duration-format");
+
+const bot = new Discord.Client({disableEveryone: true});
 
 bot.on('ready', async () =>{
     console.log('This bot is online!')
@@ -29,29 +33,38 @@ bot.on("message", async m => {
 
 // Server and User Information Commands
 
-if (m.content.startsWith(prefix + "userinfo")) {
-    let user = m.mentions.users.first() || m.author;
+bot.on("message", async message => {
+	
+	// Checks if the message author is not a bot and isn't sent in a DM channel
+	if(message.author.bot) return;
+	if(message.channel.type === "dm") return;
+	
+	let messageArray = message.content.split(" ");
+	let command = messageArray[0];
+	let args = messageArray.slice(1);
+	let com = command.toLowerCase();
+	var sender = message.author;
 
-    let userinfo = {};
-    userinfo.name = user.username
-    userinfo.discrim - `#${user.discriminator}`;
-    userinfo.id = user.id;
-    userinfo.status = user.presence.status;
-    userinfo.registered = moment.utc(m.guild.members.get(user.id).user.createdAt).format("dddd, MMMM Do, YYYY");
-    userinfo.joined = moment.utc(m.guild.members.get(user.id).joinAt).format("dddd, MMMM Do, YYYY");
+if(com === `${prefix}userinfo`) {
+	// Checks if a user is mentioned
+	let ment = message.mentions.users.first();
+		if(!ment) {
+			message.channel.send('Please mention a user!')
+		}
+	// Creats an embed with information about the mentioned user
+		let embed = new Discord.MessageEmbed()
+		.addField("Username", ment.tag)
+		.addField("ID", ment.id)
+		.addField("Status", ment.presence.status)
+		.addField("Created", ment.createdAt)
+		.setThumbnail(ment.avatarURL)
+		message.channel.send(embed)
+	// Displays a message in the console if the command was used
+		return console.log(`> userinfo command used by ${message.author.username}`);
+	}
+})
 
-    const embed = new Discord.mEmbed()
-    .setAuthor(user.tag, userinfo.avatar)
-    .setThumbnail(userinfo.avatar)
-    .addField(`Username`, userinfo.name, true)
-    .addField(`Discriminator`, userinfo.discrim, true)
-    .addField(`ID`, userinfo.id, true)
-    .addField(`Status`, userinfo.status, true)
-    .addField(`Registered`, userinfo.registered, true)
-    .addField(`Joined`, userinfo.joined)
 
-    return m.channel.send(embed);
-}
 
 if (m.content.startsWith(prefix + "serverinfo")) {
     const serverLevel = ["None", "Low", "Medium", "High", "Max"];
