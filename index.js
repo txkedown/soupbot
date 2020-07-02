@@ -10,7 +10,7 @@ bot.on('ready', async () =>{
     bot.user.setActivity("v.1.0.0", {type: "PLAYING"});
 })
 
-bot.on("message", m => {
+bot.on("message", async m => {
     let prefix = "=";
     if (m.author.bot || !m.guild) return;
     if (!m.content.startsWith(prefix)) return;
