@@ -21,7 +21,7 @@ bot.on("message", async message => {
     }
 
     if (cmd === `${prefix}serverinfo`){
-        let sEmbed = new Discord.RichEmbed()
+        let sEmbed = new Discord.MessageEmbed()
         .setColor(colours.orange)
         .setTitle("Server Info")
         .setThumbnail(message.guild.iconURL)
