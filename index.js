@@ -62,26 +62,4 @@ if(com === `${prefix}userinfo`) {
 	}
 })
 
-
-
-if (m.content.startsWith(prefix + "serverinfo")) {
-    const serverLevel = ["None", "Low", "Medium", "High", "Max"];
-    
-    const embed = new Discord.mEmbed()
-    .setAuthor(m.guild.name, m.guild.iconURL())
-    .setThumbnail(m.guild.iconURL)
-    .addField(`Owner`, m.guild.owner.user.tag, true)
-    .addField(`ID`, m.guild.id, true)
-    .addField(`Members`, m.guild.memberCount, true)
-    .addField(`Bots`, m.guild.members.filter(mem => mem.user.bot === true).size, true)
-    .addField(`Online`, m.guild.members.filter(meme => mem.presence.status != "offline").size, true)
-    .addField(`Roles`, m.guild.roles.size, true)
-    .addField(`Verification Level`, serverLevel[m.guild.verificationLevel], true)
-    .addField(`Created Date`, moment.utc(m.guild.createdAt).format("dddd, MMMM Do, YYYY"), true)
-    .addField(`Role List [${m.guild.roles.size -1}]`, m.guild.roles.map(r => r).join(" ").replace("@everyone", " "))
-
-    return m.channel.send(embed);
-
-}
-
 bot.login(process.env.token);
