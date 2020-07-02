@@ -50,8 +50,9 @@ if(com === `${prefix}userinfo`) {
 			message.channel.send('Please mention a user!')
 		}
 	// Creats an embed with information about the mentioned user
-		let embed = new Discord.MessageEmbed()
-		.addField("Username", ment.tag)
+        let embed = new Discord.MessageEmbed()
+        .addThumbnail(message.guild.iconURL, true)
+		.addField("Username", ment)
 		.addField("ID", ment.id)
 		.addField("Status", ment.presence.status)
 		.addField("Created", ment.createdAt)
