@@ -25,11 +25,11 @@ bot.on("message", async message => {
         .setColor(colours.orange)
         .setTitle("Server Info")
         .setThumbnail(message.guild.iconURL)
-        .setAuthor(`${message.guild.name} Info`, message.guild.iconURL)
-        .addField("**Guild Name:**", `${message.guild.name}`, true)
-        .addField("**Guild Onwer:**", `${message.guild.owner}`, true)
+        .setAuthor(`${message.guild.name} Information`, message.guild.iconURL)
+        .addField("**Server Name:**", `${message.guild.name}`, true)
+        .addField("**Server Owner:**", `${message.guild.owner}`, true)
         .addField("**Member Count:**", `${message.guild.memberCount}`, true)
-        .addField("**Role Count:**", `${message.guild.roles.size}`, true)
+        .addField("**Role Count:**", `${message.guild.roles.count}`, true)
         .setFooter(`SoupBot | created by txkedown | bincent#7777`, bot.user.displayAvatarURL);
         message.channel.send({embed: sEmbed});
 
