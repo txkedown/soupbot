@@ -1,6 +1,6 @@
-import { prefix as _prefix } from "./botconfig.json";
-import { Client } from 'discord.js';
-const client = new Client();
+const botconfig = require("./botconfig.json");
+const Discord = require('discord.js');
+const client = new Discord.Client();
 
 client.on('ready', async () =>{
     console.log('This bot is online!')
@@ -10,7 +10,7 @@ client.on('ready', async () =>{
 client.on("message", async message => {
     if(message.author.bot || message.channel.type === "dm") return;
 
-    let prefix = _prefix;
+    let prefix = botconfig.prefix;
     let messageArray = message.content.split(" ")
     let cmd = messageArray[0];
     let args = messageArray.slice(1);
