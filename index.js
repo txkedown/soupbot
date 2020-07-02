@@ -10,16 +10,16 @@ bot.on('ready', async () =>{
     bot.user.setActivity("v.1.0.0", {type: "PLAYING"});
 })
 
-bot.on("message", message => {
+bot.on("message", m => {
     let prefix = "=";
-    if (message.author.bot || !message.guild) return;
-    if (!message.content.startsWith(prefix)) return;
+    if (m.author.bot || !m.guild) return;
+    if (!m.content.startsWith(prefix)) return;
 
 // Ping Command
 
-    if (message.content.startsWith(prefix + "ping")) {
+    if (m.content.startsWith(prefix + "ping")) {
         const startTime = Date.now();
-        message.channel.send(`Pong!`)
+        m.channel.send(`Pong!`)
         .then(msg => {
             const endTime = Date.Now();
             msg.edit(`Pong! (${endTime - startTime}ms)`);
@@ -29,18 +29,18 @@ bot.on("message", message => {
 
 // Server and User Information Commands
 
-if (message.content.startsWith(prefix + "userinfo")) {
-    let user = message.mentions.users.first() || message.author;
+if (m.content.startsWith(prefix + "userinfo")) {
+    let user = m.mentions.users.first() || m.author;
 
     let userinfo = {};
     userinfo.name = user.username
     userinfo.discrim - `#${user.discriminator}`;
     userinfo.id = user.id;
     userinfo.status = user.presence.status;
-    userinfo.registered = moment.utc(message.guild.members.get(user.id).user.createdAt).format("dddd, MMMM Do, YYYY");
-    userinfo.joined = moment.utc(message.guild.members.get(user.id).joinAt).format("dddd, MMMM Do, YYYY");
+    userinfo.registered = moment.utc(m.guild.members.get(user.id).user.createdAt).format("dddd, MMMM Do, YYYY");
+    userinfo.joined = moment.utc(m.guild.members.get(user.id).joinAt).format("dddd, MMMM Do, YYYY");
 
-    const embed = new Discord.MessageEmbed()
+    const embed = new Discord.mEmbed()
     .setAuthor(user.tag, userinfo.avatar)
     .setThumbnail(userinfo.avatar)
     .addField(`Username`, userinfo.name, true)
@@ -50,26 +50,26 @@ if (message.content.startsWith(prefix + "userinfo")) {
     .addField(`Registered`, userinfo.registered, true)
     .addField(`Joined`, userinfo.joined)
 
-    return message.channel.send(embed);
+    return m.channel.send(embed);
 }
 
-if (message.content.startsWith(prefix + "serverinfo")) {
+if (m.content.startsWith(prefix + "serverinfo")) {
     const serverLevel = ["None", "Low", "Medium", "High", "Max"];
     
-    const embed = new Discord.MessageEmbed()
-    .setAuthor(message.guild.name, message.guild.iconURL())
-    .setThumbnail(message.guild.iconURL)
+    const embed = new Discord.mEmbed()
+    .setAuthor(m.guild.name, m.guild.iconURL())
+    .setThumbnail(m.guild.iconURL)
     .addField(`Owner`, m.guild.owner.user.tag, true)
-    .addField(`ID`, message.guild.id, true)
-    .addField(`Members`, message.guild.memberCount, true)
-    .addField(`Bots`, message.guild.members.filter(mem => mem.user.bot === true).size, true)
-    .addField(`Online`, message.guild.members.filter(meme => mem.presence.status != "offline").size, true)
-    .addField(`Roles`, message.guild.roles.size, true)
+    .addField(`ID`, m.guild.id, true)
+    .addField(`Members`, m.guild.memberCount, true)
+    .addField(`Bots`, m.guild.members.filter(mem => mem.user.bot === true).size, true)
+    .addField(`Online`, m.guild.members.filter(meme => mem.presence.status != "offline").size, true)
+    .addField(`Roles`, m.guild.roles.size, true)
     .addField(`Verification Level`, serverLevel[m.guild.verificationLevel], true)
-    .addField(`Created Date`, moment.utc(message.guild.createdAt).format("dddd, MMMM Do, YYYY"), true)
-    .addField(`Role List [${message.guild.roles.size -1}]`, message.guild.roles.map(r => r).join(" ").replace("@everyone", " "))
+    .addField(`Created Date`, moment.utc(m.guild.createdAt).format("dddd, MMMM Do, YYYY"), true)
+    .addField(`Role List [${m.guild.roles.size -1}]`, m.guild.roles.map(r => r).join(" ").replace("@everyone", " "))
 
-    return message.channel.send(embed);
+    return m.channel.send(embed);
 
 }
 
