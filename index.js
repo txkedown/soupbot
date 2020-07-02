@@ -7,7 +7,6 @@ console.log("\nPREFIX:\n" + settings.prefix);
 const moment = require("moment");
 require("moment-duration-format");
 
-const bot = new Discord.Client({disableEveryone: true});
 
 bot.on('ready', async () =>{
     console.log('This bot is online!')
